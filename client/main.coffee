@@ -341,10 +341,6 @@ shuffleArray = (a) ->
 		a[i] = t
 	a
 
-generateAccessCode = ->
-	code = access[getRandom(access.length)] + ' ' + access[getRandom(access.length)] + ' ' + access[getRandom(access.length)]
-	code
-
 generateGridWords = (room) ->
 	grid = []
 	if room.wordListType == "custom"
