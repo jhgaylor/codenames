@@ -1,0 +1,15 @@
+<template name="logs">
+	<div id="logs">
+		{{#if logs}}
+		  <ul>
+		  	{{#each logs}}
+		  		<li>
+		  			{{formatDateTime createdAt}}: {{{content}}}
+		  		</li>
+			{{/each}}
+		  </ul>
+		{{else}}
+		  | No logs yet.
+		{{/if}}
+	</div>
+</template>

@@ -1,0 +1,11 @@
+<head>
+  <title>Codenames</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+</head>
+<body></body>
+<template name="main">
+  <div id="main">
+	{{> flashMessages }}
+	{{> Template.dynamic template=whichView }}
+  </div>
+</template>
