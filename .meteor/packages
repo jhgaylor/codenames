@@ -6,7 +6,6 @@
 
 insecure
 coffeescript
-stylus
 meteor-base
 mobile-experience
 mongo

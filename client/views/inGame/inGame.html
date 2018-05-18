@@ -52,7 +52,7 @@
 		{{/if}}
 	</div>
 	{{> logs}}
-	<ul>
+	<ul class="card-container">
 		{{#each gridWords}}
 			{{#if isRoomState 'preparing'}}
 				<li data-index="{{index}}" class="card preparing w{{width}}">

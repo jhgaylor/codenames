@@ -1,3 +1,6 @@
+.card-container {
+	width: 100%;
+}
 .card {
 	text-align: center;
 	display: inline-block;
@@ -10,6 +13,8 @@
 	color: #fff;
 	background-color: #5cb85c;
 	border-color: #4cae4c;
+	height: 17%;
+	width: 17%;
 }
 .card.red {
 	color: #fff;
@@ -34,6 +39,20 @@
 .card.opened {
 	opacity: 0.3;
 }
+
+.card.opened {
+	 opacity: 0.3;
+}
+ .card.opened2 {
+	 border-color: #aaa;
+}
+ .card.opened3 {
+	 border-color: #555;
+}
+ .card.opened4 {
+	 border-color: #000;
+}
+ 
 
 .word {
 	position: relative;
