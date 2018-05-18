@@ -1,0 +1,53 @@
+body {
+	font-size: 100%;
+}
+.hidden {
+	display: none;
+}
+button {
+	padding: 0.5em;
+	margin: 0.25em 0.5em;
+	border: 1px solid #aaa;
+	border-radius: 0.5em;
+	background-color: #fff;
+}
+select {
+	margin-left: 0.5em;
+}
+#inGame {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+}
+#inGame #accessBox {
+	padding: 1em;
+}
+#inGame #logs {
+	padding: 0 1em;
+	margin: 1em 0;
+	max-height: 3em;
+	overflow-y: auto;
+	line-height: normal;
+}
+#inGame input.number {
+	width: 2em;
+}
+#inGame #customWordsForm {
+	margin: 0.25em 0.5em;
+}
+
+#inGame #customWordsForm * {
+	display: inline-block;
+	vertical-align: bottom;
+	margin: 0;
+}
+
+#inGame #customWordsForm textarea {
+	max-width: 90%;
+	width: 15em;
+	height: 5em;
+}
+#inGame ul {
+	height: 85%;
+	list-style-type: none;
+}

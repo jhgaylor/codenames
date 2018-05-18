@@ -1,0 +1,55 @@
+.card {
+	text-align: center;
+	display: inline-block;
+	vertical-align: middle;
+	margin: 1%;
+	box-sizing: border-box;
+	border-style: solid;
+	border-width: 3px;
+	border-radius: 0.5em;
+	color: #fff;
+	background-color: #5cb85c;
+	border-color: #4cae4c;
+}
+.card.red {
+	color: #fff;
+	background-color: #d9534f;
+	border-color: #d43f3a;
+}
+.card.blue {
+	color: #fff;
+	background-color: #5bc0de;
+	border-color: #46b8da;
+}
+.card.yellow {
+	color: #fff;
+	background-color: #f0ad4e;
+	border-color: #eea236;
+}
+.card.black {
+	color: #fff;
+	background-color: #000;
+	border-color: #000;
+}
+.card.opened {
+	opacity: 0.3;
+}
+
+.word {
+	position: relative;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+	pointer-events: none;
+	font-size: 2em;
+}
+@media (max-width: 800px) {
+	.word {
+		font-size: 1em;
+	}
+}
+.card.opened.word {
+	text-decoration: line-through;
+}
+ 
