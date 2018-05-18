@@ -14,5 +14,5 @@
 		"env": {
 			"MONGO_URL": "MONGO DB LINK"
 		}
-	},
+	}
 }
