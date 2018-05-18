@@ -1,31 +1,3 @@
-$(document).ready ->
-	lastTouchY = 0
-	preventPullToRefresh = false
-	$('body').on 'touchstart', (e) ->
-		if e.originalEvent.touches.length != 1
-			return
-		lastTouchY = e.originalEvent.touches[0].clientY
-		preventPullToRefresh = window.pageYOffset == 0
-		return
-	$('body').on 'touchmove', (e) ->
-		touchY = e.originalEvent.touches[0].clientY
-		touchYDelta = touchY - lastTouchY
-		lastTouchY = touchY
-		if preventPullToRefresh
-			# To suppress pull-to-refresh it is sufficient to preventDefault the first overscrolling touchmove.
-			preventPullToRefresh = false
-			if touchYDelta > 0
-				e.preventDefault()
-				return
-		return
-	return
-
-Template.registerHelper 'equals', (a, b) ->
-	a == b
-
-Template.registerHelper 'formatDateTime', (datetime) ->
-	moment(datetime).format('D MMM hh:mm A')
-
 Template.main.helpers
 	whichView: ->
 		Session.get 'currentView'
@@ -268,14 +240,6 @@ Template.inGame.events
 		Session.set 'currentView', 'lobby'
 		Session.set 'roomID', null
 		Session.set "masterCode", null
-
-Template.logs.helpers
-	logs: ->
-		room = getCurrentRoom()
-		if !room
-			return null
-		logs = Logs.find({ 'roomID': room._id }, sort: createdAt: -1).fetch()
-		logs
 
 createLog = (msg) ->
 	room = getCurrentRoom()
