@@ -1,3 +1,9 @@
+# Forked from zenador/codenames
+
+I didn't write this project originally. I'm just picking up where the author left off.
+
+https://github.com/zenador/codenames
+
 ## Description
 
 Unofficial online clone of the board game 'Codenames' (designed by Vlaada Chvátil and published by Czech Games Edition) with the following features:
