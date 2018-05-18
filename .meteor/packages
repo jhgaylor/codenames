@@ -26,7 +26,6 @@ u2622:persistent-session
 mrt:flash-messages
 mrt:cron-tick
 momentjs:moment
-meteorhacks:kadira
 standard-minifier-css
 standard-minifier-js
 datariot:ganalytics
