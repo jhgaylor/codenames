@@ -74,7 +74,6 @@ Template.lobby.events
 							Session.set 'masterCode', accessCode
 							msg = "Someone has joined as a spymaster"
 							createLog msg
-							teleUpdate(null, msg)
 					else
 						FlashMessages.sendError "Sorry, could not find any room with that access code."
 						# below is only necessary as this method is called from the access code route as well
@@ -188,15 +187,11 @@ Template.inGame.events
 			if !choice
 				return false
 		markWordAsGuessed(grid, index, room)
-		teleUpdate(room, "Word guessed: "+word)
-		teleGrid(room, false)
 	'click button#startGame': ->
 		room = getCurrentRoom()
 		if !room
 			return false
 		Rooms.update room._id, $set: state: 'started', updatedAt: new Date
-		teleUpdate(room, "Game started, first colour is "+room.colourList[0])
-		teleGrid(room, true)
 	'click button#prepareGame': ->
 		room = getCurrentRoom()
 		if !room
@@ -205,7 +200,6 @@ Template.inGame.events
 		generateGridColours(room)
 		generateGridOpened(room)
 		Rooms.update room._id, $set: state: 'preparing', updatedAt: new Date
-		teleUpdateHideKeyboard(room, "Preparing new game")
 		clearLogs()
 	'change select#wordListType': ->
 		room = getCurrentRoom()
@@ -217,7 +211,6 @@ Template.inGame.events
 		Session.set "masterCode", null
 		msg = "Someone has stopped being a spymaster"
 		createLog msg
-		teleUpdate(null, msg)
 	'click button#becomeMaster': ->
 		room = getCurrentRoom()
 		if !room
@@ -227,7 +220,6 @@ Template.inGame.events
 			Session.set "masterCode", masterCode
 			msg = "Someone has become a spymaster"
 			createLog msg
-			teleUpdate(null, msg)
 		else
 			FlashMessages.sendError "Sorry, wrong master code"
 	'click button#resetMasterCode': ->
@@ -235,13 +227,10 @@ Template.inGame.events
 		if !room
 			return false
 		newMasterCode = generateAccessCode()
-		if room.telegramMaster
-			teleUpdateFull(room, 'You have been disconnected from your room as spymaster', 1)
-		Rooms.update room._id, $set: masterCode: newMasterCode, telegramMaster: null, updatedAt: new Date
+		Rooms.update room._id, $set: masterCode: newMasterCode, updatedAt: new Date
 		Session.set "masterCode", newMasterCode
 		msg = "Someone has reset the master code and become a spymaster"
 		createLog msg
-		teleUpdate(null, msg)
 	'click button#resetColours': ->
 		room = getCurrentRoom()
 		if !room
@@ -327,8 +316,6 @@ generateNewRoom = ->
 		count1: 9
 		count2: 8
 		countA: 1
-		telegram: null
-		telegramMaster: null
 		createdAt: new Date
 		updatedAt: new Date
 	roomID = Rooms.insert(room)
@@ -412,29 +399,3 @@ checkNumber = (thingy) ->
 	if thingy < 0 or thingy > 25
 		return false
 	true
-
-teleGrid = (room, withKeyboard) ->
-	chatID = room.telegram
-	if chatID
-		Meteor.call 'printGrid', chatID, room, 0, withKeyboard
-	chatIDm = room.telegramMaster
-	if chatIDm
-		Meteor.call 'printGrid', chatIDm, room, 1, withKeyboard
-
-teleUpdate = (room, text) ->
-	teleUpdateFull(room, text, 0, false)
-
-teleUpdateHideKeyboard = (room, text) ->
-	teleUpdateFull(room, text, 0, true)
-
-teleUpdateFull = (room, text, isMaster, hideKeyboard) ->
-	if !room
-		room = getCurrentRoom()
-	if !room
-		return
-	if isMaster
-		chatID = room.telegramMaster
-	else
-		chatID = room.telegram
-	if chatID
-		Meteor.call 'messageFromWeb', chatID, text, hideKeyboard
