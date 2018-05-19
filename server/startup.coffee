@@ -23,6 +23,12 @@ Meteor.startup ->
 	    secret: DISCORD_CLIENT_SECRET
 	});
 
+	# Listen for new connections, login, logoff and application exit to manage user status and register methods to be used by client to set user status and default status
+	UserPresence.start();
+	# Active logs for every changes
+	# Listen for changes in UserSessions and Meteor.users to set user status based on active connections
+	UserPresenceMonitor.start();
+
 MyCron = new Cron(3600000) #ms
 MyCron.addJob 12, cleanUpCollections #hour
 MyCron.addJob 12, cleanUpMessages #hour

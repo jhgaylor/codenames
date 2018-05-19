@@ -1,4 +1,11 @@
 Meteor.methods
+	'becomeTeamSpymasterInRoom': (name, team) ->
+		room = Rooms.findOne name: name
+		user_id = Meteor.userId()
+		if ! room
+			return
+		room.spyMasters[team] = user_id
+		Rooms.update room._id, room
 	'ensureRoomExists': (name) ->
 		room = Rooms.findOne name: name
 		if ! room
@@ -8,6 +15,34 @@ Meteor.methods
 		Rooms.findOne masterCode: masterCode
 	'findRoomByName': (name) ->
 		Rooms.findOne name: name
+	'joinTeamInRoom': (name, team) ->
+		room = Rooms.findOne name: name
+		user_id = Meteor.userId()
+		other_team = if team == 'red' then 'blue' else 'red'
+		if ! room
+			return
+		# don't allow this behavior while the room is started
+		if room.state != 'preparing'
+			return
+		if ! room.teams[team].includes(user_id)
+			console.log("adding " + user_id + " to team " + team)
+			room.teams[team].push(user_id)
+		# remove from the other team if needed
+		if room.teams[other_team].includes(user_id)
+			console.log("removing " + user_id + " from team " + other_team)
+			index = room.teams[other_team].indexOf(user_id);
+			room.teams[other_team].splice(index, 1);
+			
+		userWasSpymaster = room.spyMasters[other_team] == user_id
+		# console.log("was spymaster", userWasSpymaster)
+		# if a spymaster changes teams they stop being spymaster
+		if userWasSpymaster
+			room.spyMasters[other_team] = null
+		Rooms.update room._id, room
+		# if a spymaster changes teams the board has to be regenerated
+		if userWasSpymaster
+			resetRoomWords name
+		return
 	'resetRoomWords': (name) ->
 		resetRoomWords(name)
 	'resetRoomWordsColors': (name) ->
@@ -76,11 +111,10 @@ resetRoomWords = (name) ->
 	# TODO: implement this method from the old world
 	# generateGridOpened(room)
 
-# TODO: remove all other Rooms.insert calls
 createNewRoom = (name) ->
 	# TODO: is this the name generator what we want?
 	name = name || generateAccessCode()
-	# TODO: add tracker of if a game is running
+	# TODO: remove any unused fields
 	room = 
 		name: name
 		state: 'preparing'
@@ -92,6 +126,12 @@ createNewRoom = (name) ->
 		pointsList: [0, 0]
 		wordListType: 'original'
 		wordListCustom: ["example 1", "example 2", "example 3"]
+		spyMasters:
+			red: null
+			blue: null
+		teams: 
+			red: []
+			blue: []
 		width: 5
 		height: 5
 		count1: 9

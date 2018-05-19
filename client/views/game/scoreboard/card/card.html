@@ -4,5 +4,9 @@
 		{{#each member in members}}
 			<p class="member">{{member.name}}{{#if member.isSpyMaster}}*{{/if}}</p>
 		{{/each}}
+
+		{{#if spymasterIsAvailable}}
+			<div class="btn btn-primary become-spymaster">Become<br>Spymaster</div>
+		{{/if}}
 	</div>
 </template>

@@ -17,6 +17,7 @@ Router.route '/g/:room',
 		room = Rooms.findOne({name: room_name})
 		handles = [
 			Meteor.subscribe('room', room_name),
+			Meteor.subscribe('room-members', room_name),
 			Meteor.subscribe('logs-by-room-name', room_name),
 		]
 		return handles
