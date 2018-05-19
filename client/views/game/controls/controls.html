@@ -1,5 +1,45 @@
 <template name="game_controls">
 	<div class="controls">
-		this will have other shit in it
+		{{#if equals room.state "preparing"}}
+		<div class="control btn btn-primary reset-words">
+			Shuffle words
+		</div>
+
+		<div class="control btn btn-primary reset-colors">
+			Shuffle Colors
+		</div>
+
+		<div class="control btn btn-primary start-game">
+			Start Game
+		</div>
+		{{/if}}
+
+		{{#if equals room.state "playing"}}
+		<div class="control btn btn-primary new-game">
+			New Game
+		</div>
+		{{/if}}
+
+		<div class="control btn btn-primary leave-room">
+			Leave Room
+		</div>
+
+		<hr style="width:70%">
+
+		<div class="control btn btn-primary">
+			Change Wordlist
+		</div>
+
+		<div class="control btn btn-primary">
+			Change Grid Size
+		</div>
+
+		<div class="control btn btn-primary">
+			Change Points to Win
+		</div>
+
+		<hr style="width:70%">
+
+		{{> loginButtons}}
 	</div>
 </template>

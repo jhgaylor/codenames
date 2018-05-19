@@ -1,3 +1,8 @@
+Accounts.ui.config
+  requestPermissions:
+    discord: ['identify', 'email', 'connections', 'guilds', 'guilds.join']
+
+
 Template.registerHelper 'equals', (a, b) ->
 	a == b
 

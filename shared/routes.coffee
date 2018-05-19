@@ -1,26 +1,3 @@
-Router.route '/old', ->
-	GAnalytics.pageview("main")
-	@render 'layout'
-	if !Session.get('currentView')
-		Session.set 'currentView', 'old_lobby'
-	else
-		Meteor.subscribe 'rooms', Session.get('roomID'), null, null
-		Meteor.subscribe 'logs', Session.get('roomID')
-	return
-
-Router.route '/code/:accessCode', ->
-	GAnalytics.pageview("code")
-	@render 'layout'
-	accessCode = this.params.accessCode.trim().toLowerCase()
-	if Session.get "roomID" # careful, this is reactive
-		if confirm "You are already in a game room. Are you sure you want to leave and join a new room with the access code '" + accessCode + "'?"
-			joinRoomWithCode(accessCode)
-	else
-		joinRoomWithCode(accessCode)
-	#window.history.pushState({}, null, "/")
-	#window.history.replaceState({}, null, "/")
-	this.redirect('/old')
-
 Router.route '/', ->
 	GAnalytics.pageview("main")
 	@render 'layout'
@@ -52,31 +29,7 @@ Router.route '/g/:room',
 			if ! confirm "You are already in a game room. Are you sure you want to leave room '" + current_room_name + "' and join a new room with the access code '" + target_room_name + "'?"
 				this.redirect('/g/' + current_room_name)
 				return
+		# createLog target_room_name, 'someone joined the room'+target_room_name
 		Session.set 'currentView', 'game'
 		Session.set 'roomName', target_room_name
 		Meteor.call 'ensureRoomExists', target_room_name, null
-
-	# if Session.get('currentView')
-	# 	Meteor.call 'findRoomByName', name, (error, roomId) ->
-	# 		Meteor.subscribe 'room', name, {
-	# 			onStop: (error) ->
-	# 				if error
-	# 					FlashMessages.sendError "Sorry, could not connect to server. Please try again later."
-	# 			onReady: () ->
-	# 				if ! room
-	# 					# TODO: deal with looking for a room that doesn't exist. create it maybe.
-	# 					return
-	# 				isMaster = false
-	# 				if ! room
-	# 					FlashMessages.sendError "Sorry, could not find any room with that name. An attempt to create it failed."
-	# 					return
-	# 				Meteor.subscribe "logs", room._id
-	# 				Session.set 'currentView', 'game'
-	# 				roomID = room._id
-	# else
-	# 	Session.set 'currentView', 'game'
-	# return
-
-
-
-

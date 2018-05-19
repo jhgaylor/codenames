@@ -1,5 +1,8 @@
 <template name="game_scoreboard">
 	<div class="scoreboard">
-		this will have lots of shit in it
+		<div class="scorecard-container">
+			{{> game_scoreboard_card blueTeam}}
+			{{> game_scoreboard_card redTeam}}
+		</div>
 	</div>
 </template>

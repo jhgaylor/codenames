@@ -14,7 +14,14 @@ Meteor.startup ->
 	Rooms.remove({});
 	Logs.remove({});
 	###
-	return
+	ServiceConfiguration.configurations.remove({
+	    service: "discord"
+	});
+	ServiceConfiguration.configurations.insert({
+	    service: "discord",
+	    clientId: DISCORD_CLIENT_ID,
+	    secret: DISCORD_CLIENT_SECRET
+	});
 
 MyCron = new Cron(3600000) #ms
 MyCron.addJob 12, cleanUpCollections #hour

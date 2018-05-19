@@ -28,3 +28,6 @@ standard-minifier-css
 standard-minifier-js
 datariot:ganalytics
 meteortoys:allthings
+accounts-base
+accounts-ui
+service-configuration

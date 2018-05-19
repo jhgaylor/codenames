@@ -5,29 +5,86 @@
 }
 
 #game .sidebar {
-	background-color: gray;
+	background-color: #808080;
 	float: left;
 	width: 300px;
 	position: relative;
 }
 
 #game_board {
-	background-color: beige;
+	/*background-color: beige;*/
 	overflow:hidden;
 	flex: 1 0 0;
 }
 
+#game_board .card-container {
+	width: 100%;
+	height: 100%;
+}
+
 #game .sidebar .controls {
 	width: 100%;
-	height: 60%;
+	height: 40%;
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#game .sidebar .controls .control {
+	width: 90%;
+	height: 30px;
+	margin: 10px 0px;
+	padding: 0px;
 }
 
 #game .sidebar .logs {
 	width: 100%;
-	height: 15%;
+	height: 30%;
 } 
 
 #game .sidebar .scoreboard {
 	width: 100%;
-	height: 25%;
+	height: 30%;
+} 
+
+#game .sidebar .scoreboard .scorecard-container {
+	width: 100%;
+	height: 100%;
+	display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+} 
+
+
+#game .sidebar .scoreboard .scorecard-container .score-card {
+	width: 50%;
+	height: 100%;
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: auto;
+} 
+
+#game .sidebar .scoreboard .scorecard-container .score-card.red{
+	background-color: #d9534f;
+} 
+#game .sidebar .scoreboard .scorecard-container .score-card.blue{
+	background-color: #5bc0de;
+} 
+
+#game .sidebar .scoreboard .scorecard-container .score-card .name {
+	font-size: 175%;
+} 
+
+#game .sidebar .scoreboard .scorecard-container .score-card .score {
+	font-size: 250%;
+	margin-bottom: 25px;
+	margin-top: 25px;
+} 
+
+#game .sidebar .scoreboard .scorecard-container .score-card .member {
+	font-size: 120%;
 } 

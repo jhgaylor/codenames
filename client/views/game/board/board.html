@@ -1,5 +1,9 @@
 <template name="game_board">
 	<div id="game_board">
-		Game Board
+		<div class="card-container">
+			{{#each card in cards}}
+				{{> game_board_card card}}
+			{{/each}}
+		</div>
 	</div>
 </template>

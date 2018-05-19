@@ -1,5 +1,15 @@
 <template name="game_logs">
-	<div class="logs">
-		this will have log shit in it
+	<div id="logs">
+		{{#if logs}}
+		  <ul>
+		  	{{#each logs}}
+		  		<li>
+		  			{{formatDateTime createdAt}}: {{{content}}}
+		  		</li>
+			{{/each}}
+		  </ul>
+		{{else}}
+		  No logs yet.
+		{{/if}}
 	</div>
 </template>

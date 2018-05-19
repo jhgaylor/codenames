@@ -1,6 +1,4 @@
-.card-container {
-	width: 100%;
-}
+
 .card {
 	text-align: center;
 	display: inline-block;
@@ -26,12 +24,13 @@
 	background-color: #5bc0de;
 	border-color: #46b8da;
 }
-.card.yellow {
+.card.neutral {
 	color: #fff;
-	background-color: #f0ad4e;
-	border-color: #eea236;
+	background-color: #dbccc1;
+	/*background-color: red;*/
+	border-color: #c5b7ad;
 }
-.card.black {
+.card.dead {
 	color: #fff;
 	background-color: #000;
 	border-color: #000;
@@ -53,7 +52,6 @@
 	 border-color: #000;
 }
  
-
 .word {
 	position: relative;
 	top: 50%;

@@ -1,0 +1,8 @@
+<template name="game_scoreboard_card">
+	<div class="score-card {{color}}">
+		<p class="score">{{cardsRemaining}}</p>
+		{{#each member in members}}
+			<p class="member">{{member.name}}{{#if member.isSpyMaster}}*{{/if}}</p>
+		{{/each}}
+	</div>
+</template>

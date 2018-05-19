@@ -1,11 +1,11 @@
 <template name="game">
 	<div id="game">
 		<div class="sidebar">
-			{{> game_scoreboard}}
-			{{> game_controls}}
-			{{> game_logs}}
+			{{> game_scoreboard context}}
+			{{> game_controls context}}
+			{{> game_logs context}}
 		</div>
-		{{> game_board}}
+		{{> game_board context }}
 	</div>
 </template>
 
