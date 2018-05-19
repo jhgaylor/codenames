@@ -1,3 +1,4 @@
 *.sublime-workspace
 settings-live*
 settings-dev*
+node_modules/
