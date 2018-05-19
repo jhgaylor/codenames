@@ -1,0 +1,33 @@
+#game {
+	height: 100%;
+	width: 100%;
+	display: flex;
+}
+
+#game .sidebar {
+	background-color: gray;
+	float: left;
+	width: 300px;
+	position: relative;
+}
+
+#game_board {
+	background-color: beige;
+	overflow:hidden;
+	flex: 1 0 0;
+}
+
+#game .sidebar .controls {
+	width: 100%;
+	height: 60%;
+}
+
+#game .sidebar .logs {
+	width: 100%;
+	height: 15%;
+} 
+
+#game .sidebar .scoreboard {
+	width: 100%;
+	height: 25%;
+} 

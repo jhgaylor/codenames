@@ -1,4 +1,9 @@
-Template.inGame.helpers
+Template.game.helpers
+	name: ->
+		Session.get 'roomName'
+
+
+
 	accessCode: ->
 		room = getCurrentRoom()
 		if room
@@ -72,7 +77,7 @@ Template.inGame.helpers
 		else
 			'?'
 
-Template.inGame.events
+Template.game.events
 	'click .card.preparing': (event) ->
 		room = getCurrentRoom()
 		if !room
@@ -183,6 +188,6 @@ Template.inGame.events
 	'click button#toggleWords': ->
 		$(".word").toggle()
 	'click button#leaveRoom': ->
-		Session.set 'currentView', 'old_lobby'
+		Session.set 'currentView', 'lobby'
 		Session.set 'roomID', null
 		Session.set "masterCode", null

@@ -1,6 +1,9 @@
-body {
+html, body, #layout {
 	font-size: 100%;
+	height: 100%;
+	width: 100%;
 }
+
 .hidden {
 	display: none;
 }
@@ -14,6 +17,13 @@ button {
 select {
 	margin-left: 0.5em;
 }
+
+
+
+
+
+
+
 #inGame {
 	position: absolute;
 	height: 100%;

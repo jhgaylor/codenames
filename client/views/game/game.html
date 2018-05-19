@@ -1,0 +1,98 @@
+<template name="game">
+	<div id="game">
+		<div class="sidebar">
+			{{> game_scoreboard}}
+			{{> game_controls}}
+			{{> game_logs}}
+		</div>
+		{{> game_board}}
+	</div>
+</template>
+
+<template name="blag_game">
+	<div id="game">
+	  <div id="accessBox">
+	  	<p>
+	  		access code for normal players: {{accessCode}}
+	  		<a href="code/{{accessCode}}">Link to share this game with normal players</a>
+	  	</p>
+
+	  	{{#if isSpymaster}}
+	  	<p>
+	  		master code for spymasters: {{masterCode}}
+	  		<a href="code/{{masterCode}}">Link to share this game with the other spymaster</a>
+	  	</p>
+	  	{{/if}}
+	  </div>
+
+	<div id="buttons">
+		{{#if isRoomState 'preparing'}}
+		  <button id="startGame">Start Game</button>
+		  <input id="gridWidth" name="gridWidth" type="number" placeholder="" value="{{width}}" class="number"/>x
+		  <input id="gridHeight" name="gridHeight" type="number" placeholder="" value="{{height}}" class="number"/>
+		  <select id="wordListType">
+		  	{{#each wordListTypes}}
+		      <option value="{{key}}" selected="{{selected}}">{{value}}</option>
+		  	{{/each}}
+		  </select>
+		  <button id="resetWords">Reset Words</button>
+		  <button id="resetMasterCode">Reset Master Code</button>
+		{{else}}
+			<button id="prepareGame">Prepare New Game</button>
+			{{#if isSpymaster}}
+				<button id="becomeNormal">Stop being spymaster</button>
+				  1 <input id="count1" name="count1" type="number" placeholder="" value="{{count1}}" class="number"/>
+				  2 <input id="count2" name="count2" type="number" placeholder="" value="{{count2}}" class="number"/>
+				  A <input id="countA" name="countA" type="number" placeholder="" value="{{countA}}" class="number"/>
+				  <button id="resetColours">Reset Colours</button>
+				  <button id="toggleWords">Toggle Word Display</button>
+			{{else}}
+				<input id="masterCode" name="masterCode" placeholder="master code" autocorrect="off" autocapitalize="off" type="text"/>
+				<button id="becomeMaster">Become a spymaster</button>
+				<input id="reqConfirm" name="reqConfirm" type="checkbox" value="1" checked="checked"/> Require Confirmation
+			{{/if}}
+		{{/if}}
+		<button id="leaveRoom">Leave Room</button>
+		{{#if isRoomState 'preparing'}}
+			<div id="customWordsForm" class="{{customWordsFormClass}}">
+			  <textarea id="customWords">{{wordListCustom}}</textarea>
+			  <!--button#saveCustomWords Save Custom Word List-->
+			</div>
+		{{else}}
+			{{colourState}}
+		{{/if}}
+	</div>
+	{{> logs}}
+	<ul class="card-container">
+		{{#each gridWords}}
+			{{#if isRoomState 'preparing'}}
+				<li data-index="{{index}}" class="card preparing w{{width}}">
+				  <div class="word">{{word}}</div>
+				</li>
+			{{else}}
+				{{#if isSpyMaster}}
+					{{#if equals opened 1}}
+						<li data-index="{{index}}" class="card opened {{colour}} w{{width}} {{openedWhen}}">
+						  <div class="word">{{word}}</div>
+						</li>
+					{{else}}
+						<li data-index="{{index}}" class="card {{colour}} w{{width}}">
+						  <div class="word">{{word}}</div>
+						</li>
+					{{/if}}
+				{{else}}
+					{{#if equals opened 1}}
+						<li data-index="{{index}}" class="card started {{colour}} w{{width}} {{openedWhen}}">
+						  <div class="word">{{word}}</div>
+						</li>
+					{{else}}
+						<li data-index="{{index}}" class="card started {{colour}} w{{width}}">
+						  <div class="word">{{word}}</div>
+						</li>
+					{{/if}}
+				{{/if}}
+			{{/if}}
+		{{/each}}
+	</ul>
+	</div>
+</template>
